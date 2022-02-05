@@ -26,7 +26,7 @@
 		"eject": "react-scripts eject",
 		"electron:start": "wait-on tcp:3000 && nodemon --exec electron .",
 		"dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start",
-		"electron:build": ""
+		"electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js"
 	},
 	"eslintConfig": {
 		"extends": [

@@ -18,17 +18,14 @@ yarn add nodemon -D
 
 ```json
 {
-	// Main electron entrypoint
 	"main": "main.js",
 
-	// Homepage
 	"homepage": "./",
 
-	// Scripts for running the app
 	"scripts": {
 		"electron:start": "wait-on tcp:3000 && nodemon --exec electron .",
 		"dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start",
-		"electron:build": ""
+		"electron:build": "yarn build && electron-builder -c.extraMetadata.main=build/main.js"
 	}
 }
 ```
@@ -58,4 +55,42 @@ const root = new BrowserWindow({
 
 // In the react components:
 const { ipcRenderer } = window.require("electron");
+```
+
+### In order to build the app for distribution, follow these steps:
+
+1 - Install these dependencies
+
+```bash
+yarn add electron-builder electron-is-dev
+```
+
+2 - In the main process, in the function that creates the root window
+
+```javascript
+const path = require("path");
+const isDev = require("electron-is-dev");
+
+function createRootWindow() {
+	// Creating the main window
+	const root = new BrowserWindow();
+
+	// Loading the react app
+	root.loadURL(isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`);
+}
+```
+
+3 - Insert these into package.json
+
+```json
+{
+	"build": {
+		"extends": null,
+		"appId": "com.example.electron-cra",
+		"files": ["dist/**/*", "build/**/*", "node_modules/**/*", "package.json"],
+		"directories": {
+			"buildResources": "assets"
+		}
+	}
+}
 ```

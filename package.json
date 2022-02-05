@@ -1,0 +1,52 @@
+{
+	"name": "comp-time-app",
+	"version": "1.0.0",
+	"private": false,
+	"dependencies": {
+		"@prisma/client": "^3.9.1",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^12.0.0",
+		"@testing-library/user-event": "^13.2.1",
+		"concurrently": "^7.0.0",
+		"cross-env": "^7.0.3",
+		"electron": "^17.0.0",
+		"prisma": "^3.9.1",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-scripts": "5.0.0",
+		"wait-on": "^6.0.0",
+		"web-vitals": "^2.1.0"
+	},
+	"main": "main-process/main.js",
+	"homepage": "./",
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"electron:start": "wait-on tcp:3000 && nodemon --exec electron .",
+		"dev": "concurrently -k \"cross-env BROWSER=none yarn start\" \"yarn electron:start",
+		"electron:build": ""
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}

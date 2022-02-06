@@ -1,0 +1,19 @@
+-- CreateTable
+CREATE TABLE "DAY" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "day" TEXT NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "ACTIVITIES" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "day_id" INTEGER NOT NULL,
+    "extra_hour" BOOLEAN NOT NULL DEFAULT false,
+    "client_name" TEXT NOT NULL DEFAULT '',
+    "description" TEXT NOT NULL,
+    "period" TEXT NOT NULL,
+    CONSTRAINT "ACTIVITIES_day_id_fkey" FOREIGN KEY ("day_id") REFERENCES "DAY" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ACTIVITIES_day_id_key" ON "ACTIVITIES"("day_id");

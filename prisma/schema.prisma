@@ -1,11 +1,38 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./database.db"
+    provider = "sqlite"
+    url      = "file:./database.db"
 }
+
+model Day {
+    // Campos
+    id  Int    @id @default(autoincrement())
+    day String
+
+    Activities Activities[]
+    @@map("DAY")
+}
+
+model Activities {
+    // Campos
+    id          Int     @id @default(autoincrement())
+    day_id      Int     @unique
+    extra_hour  Boolean @default(false)
+    client_name String  @default("")
+    description String
+    period      String
+
+    // Relacionamentos
+    day Day @relation(fields: [day_id], references: [id])
+
+    // Nome da tabela
+    @@map("ACTIVITIES")
+}
+
+// yarn prisma init
+// yarn prisma migrate dev
+// yarn prisma studio
+// yarn prisma generate -> Atualiza a base com as novas migrations

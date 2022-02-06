@@ -1,5 +1,19 @@
 
-const { BrowserWindow } = require('electron');
+const { BrowserWindow, Menu } = require('electron');
+
+// Creating a new menu with some functionalities
+const mainMenu = Menu.buildFromTemplate([
+    {
+        label: "Actions",
+        submenu: [
+            { label: "Open Dev Tools", role: "toggleDevTools", accelerator: "F12" },
+            { role: "quit", accelerator: "Alt+Q" }
+        ]
+    }
+]);
+
+// Setting the menu's application to be the just created menu
+Menu.setApplicationMenu(mainMenu);
 
 
 function createRootWindow() {
@@ -11,6 +25,8 @@ function createRootWindow() {
             nodeIntegration: true
         }
     });
+
+    const rootWc = root.webContents;
 
     root.maximize();
     root.loadURL("http://localhost:3000");

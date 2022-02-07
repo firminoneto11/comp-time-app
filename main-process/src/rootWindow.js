@@ -20,13 +20,14 @@ function createRootWindow() {
     const root = new BrowserWindow({
         width: 1920,
         height: 1080,
+        backgroundColor: "#121212",  // For smooth loading
         webPreferences: {
             contextIsolation: false,
             nodeIntegration: true
         }
     });
 
-    const rootWc = root.webContents;
+    // const rootWc = root.webContents;
 
     root.maximize();
     root.loadURL("http://localhost:3000");

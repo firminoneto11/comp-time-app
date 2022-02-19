@@ -32,7 +32,7 @@ export default function SideMenu() {
             <List>
 
                 {/* My Activities button */}
-                <ListItem button onClick={() => history.push('/')}>
+                <ListItem button onClick={() => history.push('/list-activities')}>
                     <ListItemIcon>
                         <ListIcon />
                     </ListItemIcon>
@@ -40,7 +40,7 @@ export default function SideMenu() {
                 </ListItem>
 
                 {/* New activity button */}
-                <ListItem button onClick={() => history.push('/new-activity')}>
+                <ListItem button onClick={() => history.push('/')}>
                     <ListItemIcon>
                         <SaveAsIcon />
                     </ListItemIcon>

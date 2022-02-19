@@ -12,8 +12,8 @@ function bindChannels() {
             type: 'warning',
             message: "Are you really sure that you want to quit the app?",
             buttons: answers
-        }).then(result => {
-            const answer = answers[result.response];
+        }).then(({ response: index }) => {
+            const answer = answers[index];
             if (answer === 'Yes') {
                 app.quit();
             }

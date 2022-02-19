@@ -13,12 +13,12 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 // Custom imports
-import { IpcRendererContext } from '../context/IpcRendererContext';
+import { ElectronAPIContext } from '../context/ElectronAPIContext';
 
 
 export default function SideMenu() {
 
-    const { ipcRenderer } = useContext(IpcRendererContext);
+    const { ipcRenderer } = useContext(ElectronAPIContext);
     const history = useHistory();
 
     const quitHandler = () => {

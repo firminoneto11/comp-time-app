@@ -2,20 +2,20 @@ import { createContext } from "react";
 
 const electron = window.require('electron');
 
-export const IpcRendererContext = createContext({
+export const ElectronAPIContext = createContext({
     ipcRenderer: electron.ipcRenderer
 });
 
 
-export function IpcRendererProvider({ children }) {
+export function ElectronAPIProvider({ children }) {
 
     const contextData = {
         ipcRenderer: electron.ipcRenderer
     }
 
     return (
-        <IpcRendererContext.Provider value={contextData}>
+        <ElectronAPIContext.Provider value={contextData}>
             {children}
-        </IpcRendererContext.Provider>
+        </ElectronAPIContext.Provider>
     );
 }

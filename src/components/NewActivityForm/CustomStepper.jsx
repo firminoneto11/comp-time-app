@@ -11,7 +11,7 @@ import {
 const steps = ['Pick a date and if it is about extra hours', 'Insert your hours'];
 
 
-export default function CustomStepper({ setPhase }) {
+export default function CustomStepper({ setPhase, children }) {
 
     const [activeStep, setActiveStep] = useState(0);
 
@@ -39,7 +39,7 @@ export default function CustomStepper({ setPhase }) {
     return (
         <Box sx={{ width: '100%' }}>
 
-            {/*  */}
+            {/* Rendering the steps */}
             <Stepper activeStep={activeStep}>
                 {steps.map((label) => {
                     return (
@@ -50,9 +50,8 @@ export default function CustomStepper({ setPhase }) {
                 })}
             </Stepper>
 
-            {/*  */}
-            {activeStep === steps.length ? (
-
+            {/* Rendering success components if the current step is equal to steps's length */}
+            {activeStep === steps.length && (
                 <Fragment>
 
                     <Alert severity="success" sx={{ mt: 2, mb: 1 }}>
@@ -60,19 +59,32 @@ export default function CustomStepper({ setPhase }) {
                         Hours saved successfully!
                     </Alert>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: "center" }}>
                         <Button onClick={handleReset}>Register again</Button>
                     </Box>
 
                 </Fragment>
+            )}
 
-            ) : (
-
+            {/* Rendering these components if the current step is different than the steps's length */}
+            {activeStep !== steps.length && (
                 <Fragment>
 
-                    <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+                    <Typography variant='h5' sx={{ mt: 2, mb: 1, textAlign: "center" }}>
+                        Step {activeStep + 1}
+                    </Typography>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                </Fragment>
+            )}
+
+            {/* Rendering the children */}
+            {children}
+
+            {/* Rendering these components if the current step is different than the steps's length */}
+            {activeStep !== steps.length && (
+                <Fragment>
+
+                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: "center" }}>
 
                         <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                             Back
@@ -85,7 +97,6 @@ export default function CustomStepper({ setPhase }) {
                     </Box>
 
                 </Fragment>
-
             )}
 
         </Box>

@@ -8,18 +8,20 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 
+// Importing the 'ptBR' locale
+import { ptBR } from 'date-fns/locale';
+
 
 export default function DateInput() {
     const [value, setValue] = useState(null);
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
             <DatePicker label="Pick a date" value={value}
                 onChange={(newValue) => {
                     setValue(newValue);
                 }}
-                renderInput={(params) => <TextField {...params} />}
-                onChange={(el) => console.log(el, typeof el)}
+                renderInput={(params) => <TextField {...params} value={value} />}
             />
         </LocalizationProvider>
     );

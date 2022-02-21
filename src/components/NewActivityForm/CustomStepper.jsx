@@ -6,6 +6,10 @@ import { useState, Fragment } from 'react';
 import {
     Box, Stepper, Step, StepLabel, Button, Typography, Alert, AlertTitle
 } from '@mui/material';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import CheckIcon from '@mui/icons-material/Check';
+import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
 
 
 const steps = ['Pick a date and if it is about extra hours', 'Insert your hours'];
@@ -60,7 +64,10 @@ export default function CustomStepper({ setPhase, children }) {
                     </Alert>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: "center" }}>
-                        <Button onClick={handleReset}>Register again</Button>
+                        <Button onClick={handleReset} variant="outlined"
+                            endIcon={<RestartAltRoundedIcon />}>
+                            Register again
+                        </Button>
                     </Box>
 
                 </Fragment>
@@ -86,11 +93,16 @@ export default function CustomStepper({ setPhase, children }) {
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: "center" }}>
 
-                        <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                        <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}
+                            startIcon={<KeyboardDoubleArrowLeftIcon />}>
                             Back
                         </Button>
 
-                        <Button onClick={handleNext}>
+                        <Button onClick={handleNext} variant="outlined"
+                            endIcon={activeStep === steps.length - 1 ? (
+                                <CheckIcon />
+                            ) : <KeyboardDoubleArrowRightIcon />}
+                        >
                             {activeStep === steps.length - 1 ? 'Save hours' : 'Continue'}
                         </Button>
 

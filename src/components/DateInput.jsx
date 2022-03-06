@@ -1,7 +1,4 @@
 
-// React Imports
-import { useState } from 'react';
-
 // MUI Imports
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -12,19 +9,14 @@ import DatePicker from '@mui/lab/DatePicker';
 import { ptBR } from 'date-fns/locale';
 
 
-export default function DateInput() {
-    const [value, setValue] = useState(null);
+export default function DateInput({ onChange: changeHandler, defaultValue: val }) {
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
-            <DatePicker label="Pick a date" value={value}
-                onChange={(newValue) => {
-                    setValue(newValue);
-                }}
-                renderInput={(params) => <TextField {...params} value={value} />}
+            <DatePicker label="Pick a date" value={val}
+                onChange={(newValue) => changeHandler && changeHandler(newValue)}
+                renderInput={(params) => <TextField {...params} value={val} />}
             />
         </LocalizationProvider>
     );
 }
-
-// Ele retorna um date object

@@ -15,7 +15,7 @@ import RestartAltRoundedIcon from '@mui/icons-material/RestartAltRounded';
 const steps = ['Pick a date and if it is about extra hours', 'Insert your hours'];
 
 
-export default function CustomStepper({ setPhase, children }) {
+export default function CustomStepper({ setPhase, children, validationData: valid }) {
 
     const [activeStep, setActiveStep] = useState(0);
 
@@ -64,8 +64,7 @@ export default function CustomStepper({ setPhase, children }) {
                     </Alert>
 
                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, justifyContent: "center" }}>
-                        <Button onClick={handleReset} variant="outlined"
-                            endIcon={<RestartAltRoundedIcon />}>
+                        <Button onClick={handleReset} variant="outlined" endIcon={<RestartAltRoundedIcon />}>
                             Register again
                         </Button>
                     </Box>
@@ -99,6 +98,11 @@ export default function CustomStepper({ setPhase, children }) {
                         </Button>
 
                         <Button onClick={handleNext} variant="outlined"
+
+                            disabled={activeStep === steps.length - 1 ? (
+                                valid?.secondPhaseValid ? false : true
+                            ) : valid?.firstPhaseValid ? false : true}
+
                             endIcon={activeStep === steps.length - 1 ? (
                                 <CheckIcon />
                             ) : <KeyboardDoubleArrowRightIcon />}
